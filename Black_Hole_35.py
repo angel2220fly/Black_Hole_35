@@ -38,7 +38,9 @@ class compression:
                                                         
                                                                 # Prepare the binary data for writing to the file
                                                                 jl = width_bits3
-                                                                
+                                                                import paq
+                                                                width_bits3=paq.compress(width_bits3)
+                                                                                                                                  
                                                                 # Append '.b' to the original file name
                                                                 name1 = name + ".b"
                                                                 
@@ -214,7 +216,7 @@ class compression:
                     C2=0
                     C3=0
                     C4=0
-                    Z2Z=""    
+                    ZEROS_ONE_1=""
                     Circle_times=0
                     Circle_times2=1
                     Circle_times3=0
@@ -242,6 +244,7 @@ class compression:
                         if i==2:
                             import paq
                             data=paq.decompress(data)
+                       
 
                         s=str(data)
                         long_11=len(data)
@@ -329,6 +332,7 @@ class compression:
                                                     FC=0
                                                     IF2=""
                                                     Z7=0
+                                                    CZ=0
                                                     if Circle_times==0:
                                                         SINFO=""
                                                         TUPLE=INFO
@@ -364,13 +368,16 @@ class compression:
                                                           
                                                                                                                                                          if IF1!=IF:
                                                                                                                                                                
-                                                                                                                                                                 if FC<4:
+                                                                                                                                                                 if FC<2:
                                                                                                                                                                      FC=0
                                                                                                                                                                  if Z7==0:
-                                                                                                                                                                    if FC<=255 and FC>=4 and len(bin(W)[2:])<16 or FC<=256*2-1 and FC>=5 and len(bin(W)[2:])<24 or FC<=256*3-1 and FC>=6  or FC<=256*3-1 and FC>=7 or  FC<=256*4-1 and FC>=8 or FC<=256*4-1 and FC>=9 or FC<=256*5-1 and FC>=10:
+                                                                                                                                                                    if FC>=2:
+                                                                           
+                                                                                                                                                                        
                                                                                                                                                                     
                                                                                                                                                                     
                                                                                                                                                                      Z7=1
+                                                                                                                                                                     CZ=1
                                                                                                                                                                      W1=block-16
     
                                                                                                                                                                      Sw1=format(W,'01b')
@@ -385,8 +392,12 @@ class compression:
                                                                                                                                                                      
                                                                                                                                                      
                                                                                                                                                                                                                                                                              
-                                                                                                                                                                                                                                                                                                                                                        
-                                                    W5=W3+"1"
+                                                                                                                                                                                                                                                                                                                                                         
+                                                    if CZ==0:
+                                                        W5=W3+"1"
+                                                
+                                                    elif CZ==1:
+                                                        W5=W3
 
                                                     W4=W5+W4
                                                     INFO=W4
@@ -501,14 +512,14 @@ class compression:
                                                                             
                                                                                    Z5=INFO_A
                                                                                    
-                                                                                   #not six zeros else 7 zeros or more left or 2-5 zeros
+                                                                                   #not six Zeros_onesros else 7 Zeros_onesros or more left or 2-5 Zeros_onesros
                                                                             
                         
                                                                             
                                                                                  #change back
                                                                                 
                                                                          
-                                                                                #same size
+                                                                                #same siZeros_ones
                                                                                 
                         
                                                                            
@@ -541,6 +552,7 @@ class compression:
                                                                                                                                                                                                                                                                                                                                                                                     
                                                                                                                                                                                                                                                                                                                                                                                     
                                                                         elif len(TUPLE)+8+13+8+len(C1) < long_11*8 and len(C1)!=0:
+                                                                      
                                                                             
                                                                             
                                                                             input_string+= "En="+str(En)+", "+"Longl_F="+str(len(TUPLE))+" / "
@@ -581,6 +593,7 @@ class compression:
                                                                     W="0"+str(len(C1))+"b"
                                                                     CL1=format(longl,W)        
                                                                     CL2=format(En,'015b')
+                                                                  
                                                                 
                                                                     
                                                                  
@@ -681,12 +694,13 @@ class compression:
                                                                                                                                                         Circle_times4=int(INFO[:8],2)
                                                                                                                                                         #print(Circle_times4)
                                                                                                                                                         INFO=INFO[8:]
+                                                                                                                                                     
                                                                                                                                                         
                                                                                                                                                         
                                                                                                                                                         
                                                                                                                                             while Extract1!=1:
                                                                                                                                                     
-                                                                                                                                                    
+                                                                                                                                                                                                   
                                                                                                                                                         
                                                                                                                                                     En=int(INFO[:15],2)
                                                                                                                                                         #print(longl)
@@ -783,6 +797,7 @@ class compression:
                                                                                                                                                                                                block+=3
                                                                                                                                                                                                OC=INFO[block:block+En-2]
                                                                                                                                                                                                C10=1
+                                                                                                                                                                                               C9=1
                                                                                                                                                                                                if len(OC)==0:
                                                                                                                                                                                                                                                        
                                                                                                                                                                                                                                                            File_information5_17="00000000"+Check
@@ -793,8 +808,9 @@ class compression:
                                                                                                                                                                                                E=int(OC,2)
                                                                                                                                                                                                Row1="0"+str(En-2)+"b"
                                                                                                                                                                                                
-                                                                                                                                                                                               ZE=format(E,Row1)
-                                                                                                                                                                                               if len(ZE)==0:
+                                                                                                                                                                                               
+                                                                                                                                                                                               ZEROS_ONES=format(E,Row1)
+                                                                                                                                                                                               if len(ZEROS_ONES)==0:
                                                                                                                                                                                                                                                        File_information5_17="00000000"+Check
                                                                                                                                                                                                                                                        Ex=Check
                                                                                                                                                                                                                                                        elapsed_time = process_file1(Extract1=1, File_information5_17=File_information5_17, name=name, x=x)
@@ -809,8 +825,8 @@ class compression:
                                                                                                                                                                                                
                                                                                                                                                                                           
                                                                                                                                                                                                
-                                                                                                                                                                                               ZE="01"+ZE 
-                                                                                                                                                                                               Z2Z="01"+Z2Z
+                                                                                                                                                                                               ZEROS_ONES="01"+ZEROS_ONES
+                                                                                                                                                                                               ZEROS_ONE_1="01"+ZEROS_ONE_1                                                                                                                                                                                      
                                                                                                                                                                                                block+=En-2                                                                                   
                                                                                                                             
                                                                                                                                                                                                  
@@ -828,56 +844,51 @@ class compression:
                                                                                                                                                                                             if En<=(8192*4)-1:                                                      
                                                                                                                                                                                             
                                                                                                                                                                                                 OCl=INFO[block:block+SEN]
-                                                                                                                                                                                                Size=int(OCl,2)
+                                                                                                                                                                                                SiZeros_ones=int(OCl,2)
                                                                                                                                                                                                 block+=SEN                                                               
                                                                                                                             
                                                                                                                             
                                                                                                                                                                                                
-                                                                                                                                                                                            EB=INFO[block:block+(En-Size)]
+                                                                                                                                                                                            EB=INFO[block:block+(En-SiZeros_ones)]
                                                                                                                                                                                             S=len(EB)
                                                                                                                                                                                            
-                                                                                                                                                                                            block+=En-Size
+                                                                                                                                                                                            block+=En-SiZeros_ones
                                                                                                                                                                                             Row1="0"+str(En)+"b"
                                                                                                                                                                                             if S>0:
                                                                                                                                                                                                 E=int(EB,2)
                                                                                                                                                                                             else:
                                                                                                                                                                                                 E=0
-                                                                                                                                                                                            ZE=format(E,Row1)
+                                                                                                                                                                                            ZEROS_ONES=format(E,Row1)
                                                                                                                                                                                             C="0"+str(longl)+"b"
-                                                                                                                                                                                            ZE=format(E,Row1)
-                                                                                                                                                                                            Z2Z=format(E,C)
+                                                                                                                                                                                            ZEROS_ONES=format(E,Row1)
+                                                                                                                                                                                            ZEROS_ONE_1=format(E,C)
                                                                                                                             
                                                                                                                                                                                                      
                                                                                                                                                                                                         
                                                                                                                                                                                         else:
                                                                                                                                                                                                EB=INFO[block:block+En]
                                                                                                                                                                                                C10=1
+                                                                                                                                                                                               
                                                                                                                                                                                                block+=En
                                                                                                                                                                                                Row1="0"+str(En)+"b"
                                                                                                                                                                                               
                                                                                                                             
                                                                                                                                                                                                E=int(EB,2)
-                                                                                                                                                                                               ZE=format(E,Row1)
+                                                                                                                                                                                               ZEROS_ONES=format(E,Row1)
                                                                                                                                                                                                C="0"+str(longl)+"b"
-                                                                                                                                                                                               ZE=format(E,Row1)
-                                                                                                                                                                                               Z2Z=format(E,C)                                                                                                   
+                                                                                                                                                                                               ZEROS_ONES=format(E,Row1)
+                                                                                                                                                                                               ZEROS_ONE_1=format(E,C)                                                                                                   
                                                                                                                                 
                                                                                                                                                                                         
                                                                                                                                                                                                                                         
                                                                                                                                                                                      
                                                                                                                                                                                 
-                                                                                                                                                                                        Z2=ZE
+                                                                                                                                                                                        Z2=ZEROS_ONES
                                                                                                                                                                                         #print(Z2)
                                                                                                                             
                                                                                                                                                                                         TUPLE+=Z2                                                            
                                                                                                                                                                                         #print(block)
-                                                                                                                                                                                        if Block_Check_Add ==block or C10==0 or len(TUPLE)==Block_Check_Add:
-                                                                                                                                                                                                   File_information5_17="00000000"+Check
-                                                                                                                                                                                          
-                                                                                                  
-                                                                                                                                                                                                   Ex=Check
-                                                                                                                                                                                                   elapsed_time = process_file1(Extract1=1, File_information5_17=File_information5_17, name=name, x=x)
-                                                                                                                                                                                                   return  elapsed_time                                                                                           
+                                                                                                                                                                                    
                                                                                              
                                                                                                                                                                                                                                                                                       #print(long_F)
                                                                                                                                                                                         if block>=long_F:
@@ -895,11 +906,14 @@ class compression:
                                                                                                                                                                                                                                                                                                                     
                                                                                                                                                     long_L=len(TUPLE)
                                                                                                                                                                             #print(long_L)
-                                                                                                                                                    if C9==0:
+                                                                                                                                                    if C9==0 and  (long_L-En)>=0:
                                                                                                                                                                      TUPLE=TUPLE[:long_L-En]
-                                                                                                                                                                     TUPLE+=Z2Z
-                                                                                                                                                                            
-                                                                                                                                                                                
+                                                                                                                                                                     TUPLE+=ZEROS_ONE_1
+
+                                                                                                                                                    elif C9==1 and  (long_L-2-En)>=0:
+                                                                                                                                                                     TUPLE=TUPLE[:long_L-2-En]
+                                                                                                                                                                     TUPLE+=ZEROS_ONE_1                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                              
                                                                                                                                                     N3=1
                                                                                                                                                                             
                                                                                                                                                                            
@@ -964,8 +978,9 @@ class compression:
                                                                                                                                                                                    E3+=E2
                                                                                                                                                                                    b+=1
                                                                                                                                                                                    #print(E2)
-                                                                                                                                                                               TUPLE1=TUPLE1[block+1:] 
-                                                                                                                                                                               TUPLE1=TUPLE1[:E1]+E3+TUPLE1[E1:]   
+                                                                                                                                                                               TUPLE1=TUPLE1[block:] 
+                                                                                                                                                                               TUPLE1=TUPLE1[:E1]+E3+TUPLE1[E1:]
+                                                                                                                                                                               block+=long_F                                                                                               
                                                                                                                                                                            elif E=="1":
                                                                                                                                                                                     block+=1
                                                                                                                                                                                     Z7=1 
@@ -1036,11 +1051,13 @@ class compression:
                                                             width_bits3=binascii.unhexlify(width_bits % n)
                                                             width_bits2=len(width_bits3)
                                                             File_information5_2=Clear
+                                                            import paq
+                                                            width_bits3=paq.compress(width_bits3)
+                                                                                                                                  
                                                         
                                                             jl=width_bits3
+                                                            
                                                             name1=name+".b"
-                                                            import paq
-                                                            jl=paq.compress(jl)
 
                                                    
                                                     
@@ -1092,7 +1109,8 @@ class compression:
                                                                                                                                     File_information5_2=Clear
                                                                                                                                  
                                                                                                                                     jl=width_bits3
-                                   
+                                                                                                                                  
+                                                                                                                                    
                                                                                                                                     
                                                                                                                            
                                                                                                                                    
@@ -1102,7 +1120,7 @@ class compression:
                                                                                                                                     long=len(name)
                                                                                                                                     name2=name[:long-2]
                                                                                                                                     with open(name2, "wb") as f2:
-                                                                                                                                        f2.write(jl)
+                                                                                                                                        f2.write(width_bits3)
                                                                                                                                     x2 = time()
                                                                                                                                     x3=x2-x
                                                                                                                                     xs=float(x3)
@@ -1116,6 +1134,7 @@ class compression:
                                                         
                                                         if   Circle_times3==0:
                                                                 long_16=len(File_information5)
+                                                                
                 
                                                                 if File_information5[:1]=="0":
                                                                     while File_information5[:1]!="1":
@@ -1134,9 +1153,10 @@ class compression:
                                                                     
                                                                     
                                                                     
+                                                                    
                                                         while Extract1!=1:
                                                                 
-                                                                
+                                                                                                                               
                                                                     
                                                                 En=int(INFO[:15],2)
                                                                     #print(longl)
@@ -1238,16 +1258,17 @@ class compression:
                                                                                                                return  elapsed_time                                                                                                                
                                                                                                            E=int(OC,2)
                                                                                                            Row1="0"+str(En-2)+"b"
+                                                                                                           C9=1
                                                                                                            
-                                                                                                           ZE=format(E,Row1)
-                                                                                                           if len(ZE)==0:
+                                                                                                           ZEROS_ONES=format(E,Row1)
+                                                                                                           if len(ZEROS_ONES)==0:
                  
                                                                                                                File_information5_17=Ex
                                                                                                                elapsed_time = process_file(Extract1=1, File_information5_17=File_information5_17, name=name, x=x)
                                                                                                                return  elapsed_time          
                                                                                                            C="0"+str(longl-2)+"b"
-                                                                                                           ZE=format(E,Row1)
-                                                                                                           if len(ZE)==0:
+                                                                                                           ZEROS_ONES=format(E,Row1)
+                                                                                                           if len(ZEROS_ONES)==0:
                                                                                                                Extract1=0
                                                                                                                File_information5_17=Ex
                                                                                                                elapsed_time = process_file(Extract1=1, File_information5_17=File_information5_17, name=name, x=x)
@@ -1258,8 +1279,8 @@ class compression:
                                                                                                            
                                                                                                 
                                                                                                                                                                                                                                                                                                                        
-                                                                                                           ZE="01"+ZE
-                                                                                                           Z2Z="01"+Z2Z
+                                                                                                           ZEROS_ONES="01"+ZEROS_ONES
+                                                                                                           ZEROS_ONE_1="01"+ZEROS_ONE_1
                                                                                                            block+=En-2                                                                                   
                                         
                                                                                                              
@@ -1276,24 +1297,24 @@ class compression:
                                                                                                         if En<=(8192*4)-1:                                                      
                                                                                                         
                                                                                                             OCl=INFO[block:block+SEN]
-                                                                                                            Size=int(OCl,2)
+                                                                                                            SiZeros_ones=int(OCl,2)
                                                                                                             block+=SEN                                                               
                                         
                                         
                                                                                                            
-                                                                                                        EB=INFO[block:block+(En-Size)]
+                                                                                                        EB=INFO[block:block+(En-SiZeros_ones)]
                                                                                                         S=len(EB)
                                                                                                        
-                                                                                                        block+=En-Size
+                                                                                                        block+=En-SiZeros_ones
                                                                                                         Row1="0"+str(En)+"b"
                                                                                                         if S>0:
                                                                                                             E=int(EB,2)
                                                                                                         else:
                                                                                                             E=0
-                                                                                                        ZE=format(E,Row1)
+                                                                                                        ZEROS_ONES=format(E,Row1)
                                                                                                         C="0"+str(longl)+"b"
-                                                                                                        ZE=format(E,Row1)
-                                                                                                        Z2Z=format(E,C)
+                                                                                                        ZEROS_ONES=format(E,Row1)
+                                                                                                        ZEROS_ONE_1=format(E,C)
                                         
                                                                                                                  
                                                                                                                     
@@ -1304,16 +1325,16 @@ class compression:
                                                                                                           
                                         
                                                                                                            E=int(EB,2)
-                                                                                                           ZE=format(E,Row1)
+                                                                                                           ZEROS_ONES=format(E,Row1)
                                                                                                            C="0"+str(longl)+"b"
-                                                                                                           ZE=format(E,Row1)
-                                                                                                           Z2Z=format(E,C)                                                                                                   
+                                                                                                           ZEROS_ONES=format(E,Row1)
+                                                                                                           ZEROS_ONE_1=format(E,C)                                                                                                   
                                             
                                                                                                     
                                                                                                                                                     
                                                                                                  
                                                                                             
-                                                                                                    Z2=ZE
+                                                                                                    Z2=ZEROS_ONES
                                                                                                     #print(Z2)
                                         
                                                                                                     TUPLE+=Z2                                                            
@@ -1336,11 +1357,13 @@ class compression:
                                                                                                                                                                                                                                 
                                                                 long_L=len(TUPLE)
                                                                                         #print(long_L)
-                                                                if C9==0:
+                                                                if C9==0 and (long_L-En)>=0:
                                                                                  TUPLE=TUPLE[:long_L-En]
-                                                                                 TUPLE+=Z2Z
+                                                                                 TUPLE+=ZEROS_ONE_1
                                                                                         
-                                                                                            
+                                                                elif C9==1 and (long_L-2-En)>=0:
+                                                                                 TUPLE=TUPLE[:long_L-2-En]
+                                                                                 TUPLE+=ZEROS_ONE_1                                                                                            
                                                                 N3=1
                                                                                         
                                                                                        
@@ -1393,8 +1416,9 @@ class compression:
                                                                                                E3+=E2
                                                                                                b+=1
                                                                                                #print(E2)
-                                                                                           TUPLE1=TUPLE1[block+1:] 
-                                                                                           TUPLE1=TUPLE1[:E1]+E3+TUPLE1[E1:]   
+                                                                                           TUPLE1=TUPLE1[block:] 
+                                                                                           TUPLE1=TUPLE1[:E1]+E3+TUPLE1[E1:]
+                                                                                           block+=long_F   
                                                                                        elif E=="1" or Z7==1:
                                                                                                 block+=1
                                                                                                 Z7=1 
