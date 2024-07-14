@@ -39,7 +39,7 @@ class compression:
                                                                 # Prepare the binary data for writing to the file
                                                                 jl = width_bits3
                                                                 import paq
-                                                                width_bits3=paq.compress(width_bits3)
+                                                                jl=paq.compress(jl)
                                                                                                                                   
                                                                 # Append '.b' to the original file name
                                                                 name1 = name + ".b"
