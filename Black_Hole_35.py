@@ -11,11 +11,11 @@ current_script = os.path.basename(sys.argv[0])
 # Print the name of the current running script
 print(f"The current running script is: {current_script}")
 
-# Check if the running script is 'Black_Hole_34.py'
-if current_script == 'Black_Hole_34.py':
-    print("The script 'Black_Hole_34.py' is currently running.")
+# Check if the running script is 'Black_Hole_35.py'
+if current_script == 'Black_Hole_35.py':
+    print("The script 'Black_Hole_35.py' is currently running.")
 else:
-    print("This is not 'Black_Hole_34.py'.")
+    print("This is not 'Black_Hole_35.py'.")
     raise SystemExit
 
 
