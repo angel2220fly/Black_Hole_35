@@ -24,16 +24,14 @@ class compression:
     def cryptograpy_compression4(self):
 
         def process_file1(Extract1=0, File_information5_17="Ex", name="", x=0):
-          if Extract1 == 1:
-          	import paq
-          	n = int(File_information5_17, 2)
-          	width_bits = len(File_information5_17) // 4
-          	width_bits3 = binascii.unhexlify(f"{n:0{width_bits}x}")
-          	jl = paq.compress(width_bits3)
-          	with open(f"{name}.b", "wb") as f2:
-          		f2.write(jl)
-          	elapsed_time = time() - x
-          	return str(float(elapsed_time))
+        	if Extract1 == 1:
+        		import paq
+        		n = int(File_information5_17, 2)
+        		width_bits = (len(File_information5_17) // 8) * 2
+        		binary_data = binascii.unhexlify(f"%0{width_bits}x" % n)
+        		with open(f"{name}.b", "wb") as f2:
+        			f2.write(paq.compress(binary_data))
+        		return str(float(time() - x))
 
 
 
