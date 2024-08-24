@@ -24,97 +24,27 @@ class compression:
     def cryptograpy_compression4(self):
 
         def process_file1(Extract1=0, File_information5_17="Ex", name="", x=0):
-            if Extract1 == 1:
-                # Calculate the length of the binary string
-                L = len(File_information5_17)
+          if Extract1 == 1:
+          	import paq
+          	n = int(File_information5_17, 2)
+          	width_bits = len(File_information5_17) // 4
+          	width_bits3 = binascii.unhexlify(f"{n:0{width_bits}x}")
+          	jl = paq.compress(width_bits3)
+          	with open(f"{name}.b", "wb") as f2:
+          		f2.write(jl)
+          	elapsed_time = time() - x
+          	return str(float(elapsed_time))
 
-                # Convert the binary string to an integer
-                n = int(File_information5_17, 2)
 
-                # Calculate the width in bits
-                width_bits = len(File_information5_17)
-                width_bits = (width_bits // 8) * 2
-
-                # Format width_bits as a hex string
-                width_bits = str(width_bits)
-                width_bits = "%0" + width_bits + "x"
-
-                # Convert the hex string back to binary data
-                width_bits3 = binascii.unhexlify(width_bits % n)
-                width_bits2 = len(width_bits3)
-
-                # Placeholder for a clear operation (assuming 'Clear' is a variable or function)
-                # File_information5_2 = Clear  # Commented out because 'Clear' is undefined
-
-                # Prepare the binary data for writing to the file
-                jl = width_bits3
-                import paq
-
-                jl = paq.compress(jl)
-                # Append '.b' to the original file name
-                name1 = name + ".b"
-
-                # Write the processed binary data to the file
-                with open(name1, "wb") as f2:
-                    f2.write(jl)
-
-                # Calculate the time elapsed
-                x2 = time()
-                x3 = x2 - x
-
-                # Assuming long_11 is the length of the original data in bits
-                long_11 = L * 8  # Length in bits
-
-                # Print the speed in bits per second
-
-                # Convert elapsed time to string and return
-                xs = str(float(x3))
-                return xs
 
         def process_file(Extract1=0, File_information5_17="Ex", name="", x=0):
-            if Extract1 == 1:
-                # Calculate the length of the binary string
-                L = len(File_information5_17)
-
-                # Convert binary string to integer
-                n = int(File_information5_17, 2)
-
-                # Calculate the width in bits
-                width_bits = len(File_information5_17)
-                width_bits = (width_bits // 8) * 2
-
-                # Format width_bits as a hex string
-                width_bits = str(width_bits)
-                width_bits = "%0" + width_bits + "x"
-
-                # Convert the hex string back to binary data
-                width_bits3 = binascii.unhexlify(width_bits % n)
-                width_bits2 = len(width_bits3)
-
-                # Placeholder for a clear operation (possibly unused)
-                File_information5_2 = "Clear"
-
-                # Prepare the binary data for writing to the file
-                jl = width_bits3
-
-                # Process the name to remove the last two characters
-                long = len(name)
-                name2 = name[: long - 2]
-
-                # Write the processed binary data to the file
-                with open(name2, "wb") as f2:
-                    f2.write(width_bits3)
-
-                # Calculate the time elapsed
-                x2 = time()
-                x3 = x2 - x
-                xs = float(x3)
-
-                # Print the speed in bits per
-
-                # Convert elapsed time to string and return
-                xs = str(xs)
-                return xs
+	          if Extract1 == 1:
+	          	n = int(File_information5_17, 2)
+	          	width_bits = ("%0" + str((len(File_information5_17) // 8) * 2) + "x") % n
+	          	binary_data = binascii.unhexlify(width_bits)
+	          	with open(name[:-2], "wb") as f2:
+	          		f2.write(binary_data)
+	          	return str(time() - x)
 
         def Count_adds(En, Row1, Row):
 
