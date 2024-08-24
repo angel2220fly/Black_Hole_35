@@ -116,24 +116,19 @@ class compression:
                 xs = str(xs)
                 return xs
 
-        def Count_adds(M1, En, Row1, Row):
+        def Count_adds(En, Row1, Row):
 
             Row += 1
            
 
             if Row == (8192 * 4) - 1:
                 Row = 0
-    
-
-            
 
             if En == (8192 * 4) - 1:
-
-                M1 = 0
                 En = 255
             En+=1
 
-            return M1, En, Row1, Row
+            return En, Row1, Row
 
         import re
 
@@ -459,16 +454,16 @@ class compression:
                                                 # print(input_string)
 
                                         Find = 3
-                                        M1, En, Row1, Row = Count_adds(
-                                            M1, En, Row1, Row
+                                        En, Row1, Row = Count_adds(
+                                            En, Row1, Row
                                         )
 
                                         # print(En)
                                         # print(len(TUPLE))
 
                                     else:
-                                        M1, En, Row1, Row = Count_adds(
-                                            M1, En, Row1, Row
+                                            En, Row1, Row = Count_adds(
+                                            En, Row1, Row
                                         )
 
                                 if Ci == 1:
